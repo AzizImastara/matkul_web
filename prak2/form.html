@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Mahasiswa</title>
+    <style>
+      textarea {
+        vertical-align: top;
+      }
+      fieldset{
+        margin-bottom: 24px;
+        width: 40%;
+      }
+
+    </style>
+  </head>
+  <body>
+    <h2>Form Data Mahasiswa</h2>
+
+    <fieldset >
+      <legend>Biodata</legend>
+
+      <form action="#" method="post"">
+        <table>
+          <tr>
+            <td>Nama Mahasiswa</td>
+            <td>: <input type="text" name="nama" placeholder="Nama Anda" /></td>
+          </tr>
+          <tr>
+            <td>No Induk Mahasiswa (NIM)</td>
+            <td>: <input type="number" name="nim" placeholder="12345678" /></td>
+          </tr>
+          <tr>
+            <td>Alamat Mahasiswa</td>
+            <td>
+              :
+              <textarea
+                name="alamat"
+                rows="4"
+                cols="30"
+                placeholder="Alamat Anda"
+              ></textarea>
+            </td>
+          </tr>
+          <tr>
+            <td>Tanggal Lahir</td>
+            <td>
+              :
+              <select>
+                <option value="1" selected>01</option>
+                <option value="2">02</option>
+                <option value="3">03</option>
+                <option value="4">04</option>
+                <option value="5">05</option>
+              </select>
+              <select>
+                <option value="1" selected>Januari</option>
+                <option value="2">Februari</option>
+                <option value="3">Maret</option>
+                <option value="4">April</option>
+                <option value="5">Mei</option>
+                <option value="6">Juni</option>
+                <option value="7">Juli</option>
+                <option value="8">Agustus</option>
+                <option value="9">September</option>
+                <option value="10">Oktober</option>
+                <option value="11">November</option>
+                <option value="12">Desember</option>
+              </select>
+              <select>
+                <option value="1">1990</option>
+                <option value="2">1991</option>
+                <option value="3">1992</option>
+                <option value="4">1993</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Jenis Kelamin:</td>
+            <td>
+              :
+              <input type="radio" name="jenis_kelamin" value="Pria" />
+              Pria
+              <input type="radio" name="jenis_kelamin" value="Wanita" />
+              Wanita
+            </td>
+          </tr>
+          <tr>
+            <td>Upload Foto</td>
+            <td>: <input type="file" name="foto" /></td>
+          </tr>
+          <tr>
+            <td>URL Website</td>
+            <td>
+              :
+              <input type="url" name="website" placeholder="URL Website Anda" />
+            </td>
+          </tr>
+          <tr>
+            <td>Perguruan Tinggi:</td>
+            <td>: <input type="text" name="perguruan_tinggi" /></td>
+          </tr>
+        </table>
+      </form>
+    </fieldset>
+
+    <fieldset>
+      <legend>Info Akun</legend>
+      <form action="#" method="post">
+          <table>
+        <tr>
+            <td>Email</td>
+            <td>: <input type="email" name="email" ></td>
+        </tr>
+        <tr>
+            <td>Username:</td>
+            <td>: <input type="text" name="username"></td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td>: <input type="password" name="password" ></td>
+        </tr>
+        <tr>
+            <td>Ulangi Password:</td>
+            <td>: <input type="password" name="ulangi_password" ></td>
+        </tr>
+        </table>
+
+      </form>
+    </fieldset>
+
+    <fieldset>
+      <legend>Kemampuan Dasar</legend>
+      <form action="#" method="post" enctype="multipart/form-data">
+        <table>
+            <tr>
+                <td>
+                    <label><input type="checkbox" value="HTML"> HTML</label>
+                    <label><input type="checkbox" value="CSS"> CSS</label>
+                    <label><input type="checkbox" value="Javascript"> Javascript</label>
+                    <label><input type="checkbox" value="PHP"> PHP</label>
+                    <label><input type="checkbox" value="MySQL"> MySQL</label>
+                    <label><input type="checkbox" value="Laravel"> Laravel</label>
+                    <label><input type="checkbox" value="React Native"> React Native</label>
+                </td>
+            </tr>
+        </table>
+      </form>
+    </fieldset>
+    <div>
+      <button>Reset</button>
+      <button>Simpan</button>
+      <button>Button</button>
+    </div>
+  </body>
+</html>
