@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nav</title>
+    <style>
+      nav {
+        overflow: hidden;
+        /* width: auto; */
+        /* position: absolute; */
+        background-color: #efefef;
+        max-width: fit-content;
+      }
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+      li {
+        float: left;
+      }
+      li a {
+        display: block;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        color: #000;
+      }
+      li a:hover {
+        background-color: #474747;
+        border-bottom: 4px solid #43acab;
+        color: #fff;
+      }
+      .active {
+        background-color: #43acab;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="#">Service</a></li>
+        <li><a href="#">Project</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+    </nav>
+  </body>
+</html>
