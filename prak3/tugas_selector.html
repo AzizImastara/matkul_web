@@ -4,6 +4,48 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Selector</title>
+    <style>
+      .container {
+        width: 80%;
+        margin: 0 auto;
+      }
+
+      /* Pseudo-element Selector */
+      .test_selector::before {
+        content: "[--";
+        color: black;
+      }
+
+      .test_selector::after {
+        content: "--]";
+        color: black;
+      }
+
+      /* Combinator Selector */
+      .container p {
+        font-size: 18px;
+        color: orange;
+      }
+
+      .container p + p {
+        margin-top: 200px;
+        color: blue;
+      }
+    </style>
   </head>
-  <body></body>
+  <body>
+    <div class="container">
+      <p>
+        Lorem ipsum dolor<span class="test_selector">sit amet consectetur</span
+        >adipisicing elit. Hic quidem non cupiditate pariatur libero quibusdam.
+        Nisi temporibus soluta hic facere quos, sint officiis magnam deleniti
+        sit tenetur ipsum provident dicta.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem et
+        delectus aut voluptatibus aspernatur error nihil dolores harum earum est
+        inventore rem, consectetur qui tempora modi sunt corrupti velit esse.
+      </p>
+    </div>
+  </body>
 </html>
