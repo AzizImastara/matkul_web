@@ -3,12 +3,176 @@
   padding: 0;
 }
 
-nav {
-  overflow: hidden;
-  background-color: #efefef;
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* width: 100%; */
+  /* height: 100vh; */
+  background-color: #acb2b5;
 }
-ul {
+
+.sidebar {
+  position: fixed;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 12%;
+  z-index: 1;
+  background: linear-gradient(to top, rgb(60, 59, 59), purple);
+}
+
+.sidebar nav ul {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar nav ul li {
   list-style-type: none;
-  margin: 0;
-  padding: 0;
+  margin: 35% 0;
+}
+
+.sidebar nav ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 24px;
+  font-family: sans-serif;
+}
+
+main.content {
+  margin: 12% 10% 18% 12%;
+}
+
+.hero img {
+  width: 25%;
+  height: 10%;
+}
+
+.hero {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.hero-content h1 {
+  font-size: 48px;
+  font-family: Arial;
+  margin-left: 24px;
+}
+
+.hero-content h2 {
+  font-size: 32px;
+  font-family: sans-serif;
+  margin-left: 24px;
+}
+
+.hero-content p {
+  font-size: 24px;
+  margin: 20px 0 32px 24px;
+}
+
+button {
+  color: white;
+  background-color: black;
+  padding: 12px 36px;
+  border-radius: 28px;
+  text-decoration: none;
+  margin: 24px;
+  font-size: 28px;
+  font-weight: 500;
+  font-family: sans-serif;
+}
+
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  background-color: #a7a5a5;
+}
+
+.footer img {
+  width: 30px;
+  height: 30px;
+}
+
+.footer ul {
+  list-style-type: none;
+  display: flex;
+}
+
+.footer ul li {
+  margin: 12px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 768px) {
+  main.content {
+    margin: 4%;
+  }
+
+  .sidebar {
+    width: 100%;
+    display: flex;
+    background: linear-gradient(to right, rgb(60, 59, 59), purple);
+    position: relative;
+    padding: 16px 0;
+  }
+
+  .sidebar nav ul {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .sidebar nav ul li {
+    margin: 0 48px;
+  }
+
+  .sidebar nav ul li a {
+    font-size: 16px;
+  }
+
+  .hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero img {
+    margin: 0 0 20px 0;
+  }
+
+  .hero-content {
+    text-align: center;
+  }
+
+  .hero-content h1 {
+    font-size: 24px;
+    margin: 0;
+  }
+
+  .hero-content h2 {
+    font-size: 16px;
+    margin: 0;
+  }
+
+  .hero-content p {
+    font-size: 16px;
+    margin: 0 0 16px 0;
+  }
+
+  button {
+    margin: 0;
+    font-size: 16px;
+  }
+
+  .footer {
+    position: relative;
+  }
 }
