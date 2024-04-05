@@ -1,0 +1,97 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+.input_password {
+  position: relative;
+}
+
+.input_password i {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 1;
+}
+
+.form input[type="password"] {
+  margin-right: 30px;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 0 12px;
+  background: #1bb295;
+}
+
+form {
+  padding: 24px;
+  margin: 10% 0;
+  background: #fff;
+  max-width: 500px;
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 12px 16px rgba(0, 0, 0, 0.05);
+}
+
+form h2 {
+  font-size: 28px;
+  text-align: center;
+  margin: 0 0 28px;
+}
+
+form input,
+form select {
+  padding: 8px;
+  width: 100%;
+  outline: none;
+  background: #fff;
+  border-radius: 4px;
+  border: 1px solid #bfbfbf;
+}
+
+.content-checkbox {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-gap: 5px;
+  align-items: center;
+}
+
+.content-checkbox label {
+  grid-column: 2;
+}
+
+.content-checkbox span.error {
+  grid-column: 1 / span 2;
+  margin-top: -24px;
+}
+
+.submit-btn input {
+  color: white;
+  border: none;
+  height: auto;
+  font-size: 16px;
+  padding: 12px 0;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  text-align: center;
+  background: #1bb295;
+  transition: 0.2s ease;
+  margin-top: -24px;
+}
+
+.submit-btn input:hover {
+  background: #179b81;
+}
