@@ -1,13 +1,38 @@
-
 <?php
-  session_start();
-  if (!isset($_SESSION["username"])) {
-    header("Location: login.php");
-  }
+session_start();
+if (!isset($_SESSION["username"])) {
+  header("Location: login.php");
+}
 
-  include("connection.php");
+include("connection.php");
 
-  if (isset($_POST["submit"])) {
+// Fungsi untuk mengambil data mahasiswa yang akan diperbarui
+if (isset($_GET["nim"])) {
+    $nim_to_update = mysqli_real_escape_string($connection, $_GET["nim"]);
+    $query = "SELECT * FROM student WHERE nim='$nim_to_update'";
+    $result = mysqli_query($connection, $query);
+    if ($row = mysqli_fetch_assoc($result)) {
+        // Mengisi variabel dengan nilai dari database
+        $nim = $row['nim'];
+        $name = $row['name'];
+        $birth_city = $row['birth_city'];
+        $birth_date = $row['birth_date'];
+        $faculty = $row['faculty'];
+        $department = $row['department'];
+        $gpa = $row['gpa'];
+    } else {
+        // Tampilkan pesan jika NIM tidak ditemukan
+        echo "<div class='error'>Data mahasiswa tidak ditemukan.</div>";
+        exit;
+    }
+    $birth_date_part = explode('-', $row["birth_date"]);
+    $year = $birth_date_part[0];
+    $month = $birth_date_part[1];
+    $day = $birth_date_part[2];
+}
+
+// Proses pembaruan data ketika formulir dikirim
+if (isset($_POST["submit"])) {
     $nim = htmlentities(strip_tags(trim($_POST["nim"])));
     $name = htmlentities(strip_tags(trim($_POST["name"])));
     $birth_city = htmlentities(strip_tags(trim($_POST["birth_city"])));
@@ -32,9 +57,6 @@
     $query_result = mysqli_query($connection, $query);
 
     $data_amount = mysqli_num_rows($query_result);
-    if ($data_amount >= 1 ) {
-      $error_message .= "- NIM yang sama sudah digunakan <br>";
-    }
 
     if (empty($name)) {
       $error_message .= "- Nama belum diisi <br>";
@@ -76,14 +98,19 @@
 
       $birth_date_full = $birth_year."-".$birth_month."-".$birth_date;
 
-      $query = "INSERT INTO student VALUES ";
-      $query .= "('$nim', '$name', '$birth_city', ";
-      $query .= "'$birth_date_full','$faculty','$department',$gpa)";
+      $query = "UPDATE student SET ";
+      $query .= "name='$name', ";
+      $query .= "birth_city='$birth_city', ";
+      $query .= "birth_date='$birth_date_full', ";
+      $query .= "faculty='$faculty', ";
+      $query .= "department='$department', ";
+      $query .= "gpa=$gpa ";
+      $query .= "WHERE nim='$nim'";
 
       $result = mysqli_query($connection, $query);
 
       if($result) {
-        $message = "Mahasiswa dengan nama = \"<b>$name</b>\" sudah berhasil di tambah";
+        $message = "Data mahasiswa dengan NIM = \"$nim\" berhasil diperbarui";
         $message = urlencode($message);
         header("Location: student_view.php?message={$message}");
       }
@@ -92,7 +119,8 @@
       }
     }
   }
-  else {
+
+else {
     $error_message = "";
     $nim = "";
     $name = "";
@@ -104,22 +132,22 @@
     $birth_date=1; 
     $birth_month="1"; 
     $birth_year=1996;
-  }
+}
 
-  $arr_month = [
-    "1"=>"Januari",
-    "2"=>"Februari",
-    "3"=>"Maret",
-    "4"=>"April",
-    "5"=>"Mei",
-    "6"=>"Juni",
-    "7"=>"Juli",
-    "8"=>"Agustus",
-    "9"=>"September",
-    "10"=>"Oktober",
-    "11"=>"Nopember",
-    "12"=>"Desember"
-  ];
+$arr_month = [
+  "1"=>"Januari",
+  "2"=>"Februari",
+  "3"=>"Maret",
+  "4"=>"April",
+  "5"=>"Mei",
+  "6"=>"Juni",
+  "7"=>"Juli",
+  "8"=>"Agustus",
+  "9"=>"September",
+  "10"=>"Oktober",
+  "11"=>"Nopember",
+  "12"=>"Desember"
+];
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -147,28 +175,28 @@
           echo "<div class='error'>$error_message</div>";
       }
     ?>
-    <form id="form_mahasiswa" action="student_add.php" method="post">
+    <form id="form_mahasiswa" action="" method="post">
       <fieldset>
         <legend>Mahasiswa</legend>
         <p>
           <label for="nim">NIM : </label>
-          <input type="text" name="nim" id="nim" value="<?php echo $nim ?>" placeholder="Contoh: 12345678"> (8 digit angka)
+          <input type="text" name="nim" id="nim" value="<?php echo $row["nim"] ?>" placeholder="Contoh: 12345678"> (8 digit angka)
         </p>
         <p>
           <label for="name">Nama : </label>
-          <input type="text" name="name" id="name" value="<?php echo $name ?>">
+          <input type="text" name="name" id="name" value="<?php echo $row["name"] ?>">
         </p>
         <p>
           <label for="birth_city">Tempat Lahir : </label>
           <input type="text" name="birth_city" id="birth_city"
-          value="<?php echo $birth_city ?>">
+          value="<?php echo $row["birth_city"] ?>">
         </p>
         <p>
           <label for="birth_date" >Tanggal Lahir : </label>
             <select name="birth_date" id="birth_date">
               <?php
                 for ($i = 1; $i <= 31; $i++) {
-                  if ($i == $birth_date){
+                  if ($i == $day){
                     echo "<option value=$i selected>";
                   }
                   else {
@@ -182,7 +210,7 @@
             <select name="birth_month">
               <?php
                 foreach ($arr_month as $key => $value) {
-                  if ($key == $birth_month){
+                  if ($key == $month){
                     echo "<option value=\"{$key}\" selected>{$value}</option>";
                   }
                   else {
@@ -194,7 +222,7 @@
             <select name="birth_year">
               <?php
                 for ($i = 1990; $i <= 2005; $i++) {
-                if ($i == $birth_year){
+                if ($i == $year){
                     echo "<option value=$i selected>";
                   }
                   else {
@@ -208,17 +236,17 @@
         <p>
           <label for="faculty" >Fakultas : </label>
             <select name="faculty" id="faculty">
-              <option value="FTIB" <?php echo $select_ftib ?>>FTIB </option>
-              <option value="FTEIC" <?php echo $select_fteic ?>>FTEIC</option>
+              <option value="FTIB" <?php if($row["faculty"] == "FTIB") echo "selected" ?>>FTIB </option>
+              <option value="FTEIC" <?php if($row["faculty"] == "FTEIC") echo "selected" ?>>FTEIC</option>
             </select>
         </p>
         <p>
           <label for="department">Jurusan : </label>
-          <input type="text" name="department" id="department" value="<?php echo $department ?>">
+          <input type="text" name="department" id="department" value="<?php echo $row["department"] ?>">
         </p>
         <p>
           <label for="gpa">IPK : </label>
-          <input type="text" name="gpa" id="gpa" value="<?php echo $gpa ?>" placeholder="Contoh: 2.75"> (angka desimal dipisah dengan karakter titik ".")
+          <input type="text" name="gpa" id="gpa" value="<?php echo $row["gpa"] ?>" placeholder="Contoh: 2.75"> (angka desimal dipisah dengan karakter titik ".")
         </p>
       </fieldset>
       <br>
@@ -230,6 +258,5 @@
 </body>
 </html>
 <?php
-  mysqli_close($connection);
+mysqli_close($connection);
 ?>
-
