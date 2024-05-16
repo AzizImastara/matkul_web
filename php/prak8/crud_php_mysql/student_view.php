@@ -5,16 +5,16 @@
     header("Location: login.php");
   }
 
-  // if(isset($_SESSION['start_time'])) {
-  //   if(time() - $_SESSION['start_time'] > 5) {
-  //     session_unset();
-  //     session_destroy();
-  //   } else {
-  //     $_SESSION['start_time'] = time();
-  //   }
-  // } else { 
-  //   $_SESSION['start_time'] = time();
-  // }
+  if(isset($_SESSION['start_time'])) {
+    if(time() - $_SESSION['start_time'] > 60) {
+      session_unset();
+      session_destroy();
+    } else {
+      $_SESSION['start_time'] = time();
+    }
+  } else { 
+    $_SESSION['start_time'] = time();
+  }
 
   include("connection.php");
   
